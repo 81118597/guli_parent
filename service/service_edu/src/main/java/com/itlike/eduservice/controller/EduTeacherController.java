@@ -72,7 +72,7 @@ public class EduTeacherController {
         }
         wrapper.orderByDesc("sort");
         eduTeacherService.page(Page,wrapper);
-        long total = Page.getTotal();//总记录数ss
+        long total = Page.getTotal();//总记录数
         List<EduTeacher> records = Page.getRecords();//数据list集合
         return Result.ok().data("total",total).data("rows",records);
     }

@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/eduoss/fileoss")
+@CrossOrigin(allowCredentials = "true")//解决跨域问题
 public class OssController {
     @Autowired
     private OssService ossService;

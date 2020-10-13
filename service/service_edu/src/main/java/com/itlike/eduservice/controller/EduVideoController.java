@@ -1,10 +1,13 @@
 package com.itlike.eduservice.controller;
 
 
+import com.itlike.eduservice.client.VodClient;
 import com.itlike.eduservice.entity.EduVideo;
 import com.itlike.eduservice.service.EduVideoService;
+import com.itlike.servicebase.exceptionhandler.GuliException;
 import com.itlike.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 public class EduVideoController {
     @Autowired
     private EduVideoService videoService;
+    @Autowired
+    private VodClient vodClient;
     @PostMapping("/addvideo")
     public Result addvideo(@RequestBody EduVideo video){
         videoService.save(video);
@@ -28,6 +33,14 @@ public class EduVideoController {
     }
     @DeleteMapping("/delvideo/{id}")
     public Result delvideo(@PathVariable String id){
+        EduVideo byId = videoService.getById(id);
+        String VideoSourceId=byId.getVideoSourceId();
+        if(!StringUtils.isEmpty(VideoSourceId)){
+            Result result = vodClient.removeAlyVideo(VideoSourceId);
+            if(result.getCode()==20001){
+                throw new GuliException(20001,"熔断器执行");
+            }
+        }
         videoService.removeById(id);
         return Result.ok();
     }

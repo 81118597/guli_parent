@@ -2,9 +2,12 @@ package com.itlike.eduservice.controller;
 
 
 import com.baomidou.mybatisplus.extension.api.R;
+import com.itlike.eduservice.client.VodClient;
 import com.itlike.eduservice.entity.EduChapter;
+import com.itlike.eduservice.entity.EduVideo;
 import com.itlike.eduservice.entity.chapter.ChapterVo;
 import com.itlike.eduservice.service.EduChapterService;
+import com.itlike.eduservice.service.EduVideoService;
 import com.itlike.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +28,10 @@ import java.util.List;
 public class EduChapterController {
     @Autowired
     private EduChapterService chapterService;
+    @Autowired
+    private EduVideoService videoService;
+    @Autowired
+    private VodClient vodClient;
     //课程大纲列表
     @GetMapping("/getChapterVideo/{courseId}")
     public Result getChapterVideo(@PathVariable("courseId") String courseId){

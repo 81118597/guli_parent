@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itlike.eduservice.mapper.EduCourseMapper">
 
+    <select id="getCoursePublish" resultType="com.itlike.eduservice.entity.vo.CoursePublishVo">
+       select ec.id,ec.title,ec.price,ec.lesson_num as lessonNum,ec.cover,tea.name as teacherName,ss1.title as subjectLevelOne ,ss2.title as subjectLevelTwo
+        from edu_course ec
+        left join edu_course_description ecd
+        on ec.id=ecd.id
+        left join edu_teacher tea
+        on ec.teacher_id= tea.id
+        left join edu_subject ss1 on ec.subject_parent_id=ss1.id
+        left join edu_subject ss2 on ec.subject_id=ss2.id
+        where ec.id=#{id}
+    </select>
 </mapper>

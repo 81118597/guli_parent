@@ -8,7 +8,7 @@ import java.util.Map;
 
 //统一返回结果
 @Data
-public class Result {
+public class  Result {
     @ApiModelProperty(value = "是否成功")
     private boolean success;
     @ApiModelProperty(value = "返回码")

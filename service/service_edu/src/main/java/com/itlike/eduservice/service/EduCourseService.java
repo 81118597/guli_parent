@@ -2,6 +2,7 @@ package com.itlike.eduservice.service;
 
 import com.itlike.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.itlike.eduservice.entity.vo.CoursePublishVo;
 import com.itlike.eduservice.entity.vo.courseInfoVo;
 
 import java.util.List;
@@ -21,4 +22,10 @@ public interface EduCourseService extends IService<EduCourse> {
     courseInfoVo getcourseInfo(String id);
 
     void updatecourse(courseInfoVo vo);
+
+    CoursePublishVo getCoursePublish(String id);
+
+    void DelCourse(String id);
+
+    List<EduCourse> courseAll();
 }
